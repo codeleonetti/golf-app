@@ -11,4 +11,7 @@ class ApplicationController < Sinatra::Base
     erb :welcome
   end
 
+  get '/new' do
+    erb :golfer
+  end
 end

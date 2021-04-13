@@ -1,3 +1,0 @@
-class GolferController < ApplicationController
-
-end

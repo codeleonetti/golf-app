@@ -1,6 +1,6 @@
 class CreateGolfer < ActiveRecord::Migration[5.2]
   def change
-    create_table :golfer do |t|
+    create_table :golfers do |t|
       t.string :name
       t.string :hometown
       t.string :username

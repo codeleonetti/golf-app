@@ -10,17 +10,19 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_04_12_182937) do
+ActiveRecord::Schema.define(version: 2021_04_13_024338) do
 
   create_table "golf_courses", force: :cascade do |t|
     t.string "name"
     t.string "location"
     t.string "phone_number"
     t.string "number_of_holes"
-    t.integer "par_for_course"
+    t.integer "scorecard"
+    t.integer "front_9"
+    t.integer "back_9"
   end
 
-  create_table "golfer", force: :cascade do |t|
+  create_table "golfers", force: :cascade do |t|
     t.string "name"
     t.string "hometown"
     t.string "username"
