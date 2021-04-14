@@ -11,5 +11,16 @@ class ApplicationController < Sinatra::Base
     erb :"home"
   end
 
+
+  helpers do
+    def logged_in?
+      session[:golfer.id]
+    end
+
+    def current_user
+      @golfer ||= Golfer.find_by(id: session[:golfer.id])
+    end
+  end
+
   
 end

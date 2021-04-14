@@ -6,23 +6,29 @@ class GolfersController < ApplicationController
     end
     
     get '/golfer/new' do
-        erb :"golfer/new_golfer"
+        erb :"golfer/new"
      end
 
-     post '/new_golfer' do
-        golfer = Golfer.new(params)
-        golfer.save
+    post '/golfer/new' do
+       @golfer = Golfer.new(params)
+       if @golfer && @golfer.save
+        session[:golfer_id] = @golfer.id
+        redirect"/golfer/show"
+       else
+        redirect "/login"
+       end
     end
     
      get '/golfer/show' do
         id = params[:id]
         @golfer = Golfer.find_by_id(params[id])
-        erb :"golfer/golfer_show"
+        erb :"golfer/show"
     end
     # create profile page 
-    post '/golfer/' do
-        golfer = Golfer.new(params)
-        golfer.save
+    post '/golfer' do
+        @golfer = Golfer.new(params)
+        @golfer.save
+       erb :"golfer/show"
     end
 
     get '/golfer/:id/edit' do

@@ -5,7 +5,7 @@ class SessionsController < ApplicationController
     end
 
     get '/signin' do
-        erb :"sessions/sessions_login"
+        erb :"sessions/login"
     end
 
     post '/login' do
@@ -14,16 +14,21 @@ class SessionsController < ApplicationController
             session[:golfer_id] = golfer.id #if does load into memory/sessions
             redirect '/golfer/show'
         else
-            redirect "/golf_course"
+            redirect "/login"
         end
     end
 
+    get '/logout' do
+        sessions.clear
+        redirect "/"
+    end
+
     get '/signup' do
-        erb :"golfer/new_golfer"
+        erb :"golfer/new"
     end
 
     post '/signup' do
-        erb :"golfer/golfer_show"
+        erb :"golfer/show"
     end
 
 end

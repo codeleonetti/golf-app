@@ -1,16 +1,27 @@
 
 class GolfCoursesController < ApplicationController
 
-    get '/golf_courses' do
+    get '/golf_courses' do # grabs all courses from db
         @course = GolfCourse.all
-        erb :"golf_courses/golf_course"
+        erb :"golf_courses/index"
     end
 
-    get '/golf_courses/new' do # this sets a new page
-        erb :"golf_course/new"
+    get '/golf_courses/new' do # this gets the form to create a new course
+        erb :"golf_courses/new"
     end
 
-    get '/golf_courses/:id' do
+    post '/golf_courses/new' do #saves new istance of a course
+        @course = Course.new(params)     #using params to save all data into their own (ie :name,:address, etc)
+       if @course.save #saves the instance of course
+        flash[:notice] = "new course added!"
+        redirect "golf_courses/index"
+       else
+        flash[:notice] = "course failed to be saved"
+        redirect "golf_courses/new"
+       end    
+    end
+
+    get '/golf_courses/:id' do # this getting the info to update
        
         id = params[:id]     #setting a variable
         @course = GolfCourse.find_by_id(params[id])   #using a instance variable to find_by_id we just set
@@ -18,29 +29,22 @@ class GolfCoursesController < ApplicationController
     end
 
     post '/golf_courses' do #saves new istance of a course
-        course = Course.new(params)     #using params to save all data into their own (ie :name,:address, etc)
-        course.save
+        @course = Course.new(params)     #using params to save all data into their own (ie :name,:address, etc)
+       if @course.save #saves the instance of course
+        flash[:notice] = "new course added!"
+        redirect "golf_courses/index"
+       else
+        flash[:notice] = "course failed to be saved"
+        redirect "golf_courses/new"
+       end    
     end
 
-    get '/golf_courses/:id/edit' do
-        # find by id with params 
-        #@course = GolfCourse.find_by(id:)
-
-        #edit that form
-        
-    end
-
-    post '/golf_courses' do
-
-    end
 
     delete '/golf_courses/:id' do
         GolfCourse.destroy_all
     end
 
-    put '/golf_courses/:id' do
-
-    end
+    
 
 
 
