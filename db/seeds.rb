@@ -39,12 +39,13 @@ end
 
     GolfCourse.create(
         name: Faker::Company.name,
-        location: Faker::Address.street_address + Faker::Address.city +  Faker::Address.state_abbr,
+        location: Faker::Address.street_address + Faker::Address.city + Faker::Address.state_abbr,
         phone_number: Faker::PhoneNumber.phone_number,
-        number_of_holes: 18, #number_of_holes.sample,
+        number_of_holes: 18, 
         scorecard: 72,
         front_9: 36,
-        back_9: 36
+        back_9: 36,
+        golfer: Golfer.all.sample
     )
 
 

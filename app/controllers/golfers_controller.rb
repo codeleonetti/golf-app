@@ -1,27 +1,37 @@
 class GolfersController < ApplicationController
 
     get '/golfer' do
-        erb :golfer
+        @golfer = Golfer.all
+        erb :"golfer/index"
     end
+    
+    get '/golfer/new' do
+        erb :"golfer/new_golfer"
+     end
 
-    get '/golfer/:id' do
-        erb :golfer/show
+     post '/new_golfer' do
+        golfer = Golfer.new(params)
+        golfer.save
     end
-
-    get '/golfer/:new' do
-       
+    
+     get '/golfer/show' do
+        id = params[:id]
+        @golfer = Golfer.find_by_id(params[id])
+        erb :"golfer/golfer_show"
+    end
+    # create profile page 
+    post '/golfer/' do
+        golfer = Golfer.new(params)
+        golfer.save
     end
 
     get '/golfer/:id/edit' do
 
     end
 
-    post '/golfer/' do
-        Golfer,create
-    end
 
     delete '/golfer/:id' do
-        Golfer.destroy
+        Golfer.destroy_all
     end
 
     put '/golfer/:id' do

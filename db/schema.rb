@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_04_13_024338) do
+ActiveRecord::Schema.define(version: 2021_04_13_145548) do
 
   create_table "golf_courses", force: :cascade do |t|
     t.string "name"
@@ -20,6 +20,7 @@ ActiveRecord::Schema.define(version: 2021_04_13_024338) do
     t.integer "scorecard"
     t.integer "front_9"
     t.integer "back_9"
+    t.integer "golfer_id"
   end
 
   create_table "golfers", force: :cascade do |t|
