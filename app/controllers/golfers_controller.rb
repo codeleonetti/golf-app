@@ -2,21 +2,18 @@ class GolfersController < ApplicationController
 
     get '/golfer' do
         @golfer = Golfer.all
-        erb :"golfer/index"
+       erb :"golfer/index"
     end
     
     get '/golfer/new' do
         erb :"golfer/new"
-     end
+    end
 
-    post '/golfer/new' do
-       @golfer = Golfer.new(params)
-       if @golfer && @golfer.save
-        session[:golfer_id] = @golfer.id
-        redirect"/golfer/show"
-       else
-        redirect "/login"
-       end
+    get '/golfer/:id' do
+        @golfer = Golfer.new(params)
+        binding.pry
+        @golfer.save
+        erb :"golfer/show"
     end
     
      get '/golfer/show' do
@@ -25,11 +22,20 @@ class GolfersController < ApplicationController
         erb :"golfer/show"
     end
     # create profile page 
-    post '/golfer' do
-        @golfer = Golfer.new(params)
-        @golfer.save
-       erb :"golfer/show"
+    post '/golfer/:id' do
+         @golfer = Golfer.new(params)
+        if @golfer && @golfer.save
+         session[:golfer_id] = @golfer.id
+         redirect"/golfer/#{golfer.id}"
+        else
+         redirect "/login"
+        end 
     end
+        # binding.pry
+        # @golfer = Golfer.new(params)
+        # @golfer.save
+    #    erb :"golfer/show"
+    
 
     get '/golfer/:id/edit' do
 

@@ -5,11 +5,11 @@
 <body>
 
     <h1> Profile Page </h1>
-    <h2> Welcome <%=  %> </h2># this is substitution syntax
+    <h2> Welcome <%= @golfer.name %> </h2># this is substitution syntax
     <br><br><br><br>
-        <p>Name: <%=  %></p>
-        <p>Address: <%=  %></p>
-        <p>Handicap: <%=  %></p>
+        <p>Name: <%= @golfer.name %></p>
+        <p>Address: <%= @golfer.hometown%></p>
+        <p>Handicap: <%= @golfer.handicap %></p>
         
         # <p>: <%=  %></p>
         # <p>: <%=  %></p>
