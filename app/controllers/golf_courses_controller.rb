@@ -1,7 +1,7 @@
 
 class GolfCoursesController < ApplicationController
 
-    get '/golf_courses/index' do # grabs all courses from db
+    get '/golf_courses/index' do # grabs all courses from db #Read
         @course = GolfCourse.all
         erb :"golf_courses/index"
     end
@@ -10,39 +10,42 @@ class GolfCoursesController < ApplicationController
         erb :"golf_courses/new"
     end
 
-    post '/golf_courses/new' do #saves new istance of a course
-       
+    post '/golf_courses/new' do #saves new istance of a course #Create
         @course = GolfCourse.new(params)
              #using params to save all data into their own (ie :name,:address, etc)
        if @course.save #saves the instance of course
         flash[:notice] = "new course added!"
-        redirect "golf_courses/index"
+        redirect "golf_courses/#{@course.id}"
        else
         flash[:notice] = "course failed to be saved"
-        redirect "golf_courses/new"
+        redirect "golf_courses/index"
        end    
     end
 
-    get '/golf_courses' do # this getting the info to update
-       
-        id = params[:id]     #setting a variable
-        @course = GolfCourse.find_by_id(params[id])   #using a instance variable to find_by_id we just set
+    get '/golf_courses/:id' do
         erb :"golf_courses/show"
     end
 
-    post '/golf_courses/new' do #saves new istance of a course
-        @course = GolfCourse.new(params)     #using params to save all data into their own (ie :name,:address, etc)
-       if @course.save #saves the instance of course
-        flash[:notice] = "new course added!"
-        redirect "golf_courses/index"
-       else
-        flash[:notice] = "course failed to be saved"
-        redirect "golf_courses/new"
-       end    
-    end
+    # get '/golf_courses' do # this getting the info to update
+       
+    #     id = params[:id]     #setting a variable
+    #     @course = GolfCourse.find_by_id(params[id])   #using a instance variable to find_by_id we just set
+    #     erb :"golf_courses/show"
+    # end
+
+    # post '/golf_courses/new' do #saves new istance of a course
+    #     @course = GolfCourse.new(params)     #using params to save all data into their own (ie :name,:address, etc)
+    #    if @course.save #saves the instance of course
+    #     flash[:notice] = "new course added!"
+    #     redirect "golf_courses/index"
+    #    else
+    #     flash[:notice] = "course failed to be saved"
+    #     redirect "golf_courses/new"
+    #    end    
+    # end
 
 
-    delete '/golf_courses/:id' do
+    delete '/golf_courses/:id' do  #Delete
         GolfCourse.destroy_all
     end
 
