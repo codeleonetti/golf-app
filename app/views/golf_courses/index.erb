@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
+<link rel="stylesheet" href="/stylesheets/login.css" />
 </head>
 <body>
     <div>
@@ -20,7 +21,7 @@
             <li>Scorecard: <%= course.scorecard %></li>  
             <li>Front 9: <%= course.front_9 %></li>
             <li>Back 9: <%= course.back_9 %></li>
-        <br><br><br>    
+        <br><hr>   
         <div>           
     <%end%>
     <h3><a href="/golfer/<%=current_user.id%>">Profile Page</a></h3>

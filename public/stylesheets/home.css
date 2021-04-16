@@ -1,0 +1,20 @@
+body {
+  background-color:#3d3d3d;
+
+}
+
+h1{
+    font-family: 'Karantina', cursive;
+    font-weight: bold;
+}
+
+a {
+    color: black;
+    text-decoration: none;
+    text-transform: uppercase;
+}
+
+img {
+    max-width:100%;
+    height:auto;
+}
