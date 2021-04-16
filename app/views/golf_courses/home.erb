@@ -1,0 +1,13 @@
+
+        <h1><%= @course.name %></h1>
+        <h2>If course info need to updated please click<a href="/golf_courses/<%=@course.id%>/edit">here</a></h2>
+        <br><br><br><br>
+       
+        <li>Address: <%= @course.location %></li>
+        <li>Phone Number: <%= @course.phone_number  %></li>
+        <li>Number of Holes: <%= @course.number_of_holes %></li>
+        <li>Scorecard: <%= @course.scorecard %></li>  
+        <li>Front 9: <%= @course.front_9 %></li>
+        <li>Back 9: <%= @course.back_9 %></li>
+        <h3><a href="/golf_courses/index">List of Courses</a></h3>
+        <h3><a href="/golfer/<%=current_user.id%>">Profile Page</a></h3>

@@ -18,11 +18,11 @@ class ApplicationController < Sinatra::Base
 
   helpers do
     def logged_in?
-      session[:golfer.id]
+      session[:golfer_id]
     end
 
     def current_user
-      @golfer ||= Golfer.find_by(id: session[:golfer.id])
+      @current_user ||= Golfer.find_by(id: session[:golfer_id])
     end
   end
 

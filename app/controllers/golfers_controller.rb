@@ -7,21 +7,39 @@ class GolfersController < ApplicationController
     
 
     get '/golfer/:id' do
-       
-        @golfer = Golfer.find(params[:id])
-       
-       
+        @golfer = Golfer.find_by_id(params[:id])
         erb :"golfer/show"
     end
     
-
+    
     get '/golfer/:id/edit' do
-
+        if logged_in?
+             @golfer = Golfer.find_by_id(params[:id])
+            # if @golfer.id != logged_in? || @golfer.id == nil
+            if current_user.id == @golfer.id  
+                erb :"golfer/edit"
+            else
+                flash[:alert] = "You can only edit your own profile."
+                redirect "/" 
+             end
+        else
+            redirect '/login'
+        end
+    end
+    post '/golfer/:id/edit' do
+            @golfer = Golfer.find_by_id(params[:id]) #using params to find golfer by its id
+            @golfer.update(params)
+            if @golfer.save
+                redirect "golfer/#{@golfer.id}"
+            else
+                redirect "golfer/new"
+            end   
     end
 
-
     delete '/golfer/:id' do
-        Golfer.destroy_all
+        @golfer = Golfer.find_by_id(params[:id])
+        @golfer.destroy
+        redirect "sessions/login"
     end
 
    
@@ -37,3 +55,5 @@ end
 #| PUT/PATCH | /golfer/:id      | edit    |
 
 #setting up golfers
+    #<h3><a href="/golfer/<%=@golfer.id%>">Profile Page</a></h3>
+

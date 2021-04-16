@@ -13,7 +13,7 @@
     <% @course.each do |course| %>
         <div>
         <br><br><br>
-            <li>Course Name: <%= course.name  %></li>
+            <li>Course Name: <a href="/golf_courses/<%=course.id%>/home"><%= course.name %></a></li>
             <li>Address: <%= course.location %></li>
             <li>Phone Number: <%= course.phone_number  %></li>
             <li>Number of Holes: <%= course.number_of_holes %></li>
@@ -23,7 +23,7 @@
         <br><br><br>    
         <div>           
     <%end%>
-    <h3><a href="/golfer/show">Profile Page</a></h3>
+    <h3><a href="/golfer/<%=current_user.id%>">Profile Page</a></h3>
 
 <body>
 

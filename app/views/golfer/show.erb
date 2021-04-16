@@ -5,15 +5,16 @@
     <body>
 
         <h1> Profile Page </h1>
-        <h2> Welcome <%= @golfer.name %> </h2># this is substitution syntax
+        <h2> Welcome <%= @golfer.name %> </h2>
         <br><br><br><br>
             <p>Name: <%= @golfer.name %></p>
             <p>Address: <%= @golfer.hometown%></p>
             <p>Handicap: <%= @golfer.handicap %></p>
-          
-            # <p>: <%=  %></p>
-            # <p>: <%=  %></p>
-            # <p>: <%=  %></p>
+
+           
+           
+           
+            <h3><a href="/golfer/<%=@golfer.id%>/edit">Edit Info</a></h3>
 
             <h3><a href="/golf_courses/index">Look at Courses</a></h3>
         
