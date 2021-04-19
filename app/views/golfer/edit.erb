@@ -20,6 +20,9 @@
         <br><br>
         <input type ="submit" id = "Save profile changes">
     </form>
-
-
-    <h3><a href="/golf_courses/index">Look at Courses</a></h3>
+<br>
+<h5> If you would like to delete your Profile Please select Delete</h5>
+    <form method="POST" action="/golfer/<%= @golfer.id %>">
+        <input type="hidden" id="hidden" name="_method" value="DELETE">
+        <input class="show-btns" type="submit" value="DELETE">
+    </form>

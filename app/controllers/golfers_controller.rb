@@ -36,10 +36,10 @@ class GolfersController < ApplicationController
             end   
     end
 
-    delete '/golfer/:id' do
+    post '/golfer/:id' do
         @golfer = Golfer.find_by_id(params[:id])
         @golfer.destroy
-        redirect "sessions/login"
+        redirect "/"
     end
 
    
