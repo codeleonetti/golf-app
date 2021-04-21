@@ -7,8 +7,13 @@ class GolfersController < ApplicationController
     
 
     get '/golfer/:id' do
+        if Golfer.where(id: params[:id]).exists?
         @golfer = Golfer.find_by_id(params[:id])
         erb :"golfer/show"
+        else 
+            flash[:alert] = "Please log in on the home page"
+            redirect "/"
+        end
     end
     
     
@@ -19,7 +24,7 @@ class GolfersController < ApplicationController
             if current_user.id == @golfer.id  
                 erb :"golfer/edit"
             else
-                flash[:alert] = "You can only edit your own profile."
+                flash[:alert] = "Please log in on the home page."
                 redirect "/" 
              end
         else
