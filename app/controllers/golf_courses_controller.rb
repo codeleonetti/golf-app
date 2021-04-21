@@ -6,8 +6,13 @@ class GolfCoursesController < ApplicationController
         erb :"golf_courses/index"
     end
     get '/golf_courses/:id/home' do
+        if GolfCourse.where(id: params[:id]).exists?
         @course = GolfCourse.find_by_id(params[:id])
         erb :"golf_courses/home"
+        else
+           
+            redirect "golf_courses/index"
+        end
     end
 
 

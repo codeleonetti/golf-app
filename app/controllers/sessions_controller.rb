@@ -12,6 +12,7 @@ class SessionsController < ApplicationController
 
             redirect "/golfer/#{golfer.id}"
         else
+            flash[:notice] ="Your username or password is incorrect please try again"
             redirect "/login"
         end
     end
