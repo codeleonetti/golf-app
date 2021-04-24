@@ -23,6 +23,7 @@ class SessionsController < ApplicationController
 
     post '/signup' do 
         @golfer = Golfer.new(params)
+        # @golfcourse = GolfCourse.all
         if @golfer && @golfer.save
          session[:golfer_id] = @golfer.id
          redirect"/golfer/#{@golfer.id}"

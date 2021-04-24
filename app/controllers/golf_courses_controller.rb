@@ -2,12 +2,16 @@
 class GolfCoursesController < ApplicationController
 
     get '/golf_courses/index' do # grabs all courses from db #Read
-        @course = GolfCourse.all
-        erb :"golf_courses/index"
+        if logged_in?
+            @course = GolfCourse.all
+            erb :"golf_courses/index"
+        else
+            redirect "/"
     end
+
     get '/golf_courses/:id/home' do
-        if GolfCourse.where(id: params[:id]).exists?
-        @course = GolfCourse.find_by_id(params[:id])
+        #if GolfCourse.where(id: params[:id]).exists?
+       if @course = GolfCourse.find_by_id(params[:id])
         erb :"golf_courses/home"
         else
            
@@ -17,42 +21,57 @@ class GolfCoursesController < ApplicationController
 
 
     get '/golf_courses/new' do # this gets the form to create a new course
+        if logged_in?
         erb :"golf_courses/new"
+        else
+            erb :"home"
     end
     post '/golf_courses/new' do #saves new istance of a course #Create
-        @course = GolfCourse.new(params)
-             #using params to save all data into their own (ie :name,:address, etc)
-       if @course.save #saves the instance of course
-        flash[:notice] = "new course added!"
-        redirect "golf_courses/#{@course.id}/home"
-       else
-        flash[:notice] = "course failed to be saved"
-        redirect "golf_courses/index"
-       end    
+        
+        @course = GolfCourse.new(params) #using params to save all data into their own (ie :name,:address, etc)
+        if logged_in? && @course.golfer_id = current_user.id
+            @course.save #saves the instance of course
+            flash[:notice] = "new course added!"
+            redirect "golf_courses/#{@course.id}/home"
+        else
+            flash[:notice] = "course failed to be saved"
+            redirect "golf_courses/index"
+        end    
     end
+    # get '/golf_courses/:id' do
+    #     erb :"golf_courses/show"
+    # end
+ 
     get '/golf_courses/:id' do
-        erb :"golf_courses/show"
+        if logged_in?
+            @course = GolfCourse.find(params[:id])
+            erb :"golf_courses/show"
+        end
     end
-
     
 
-    get '/golf_courses/:id/edit' do # this getting the info to update  
+    get '/golf_courses/:id/edit' do # this getting the info to update 
         @course = GolfCourse.find_by_id(params[:id])   #using a instance variable to find_by_id we just set
+        
+       
+        if logged_in? && @course.golfer_id = @golfer.id
+           # binding.pry
         erb :"golf_courses/edit"
+        else
+            redirect  "golf_courses/index"
+        end
     end
     post '/golf_courses/:id/edit' do
         @course = GolfCourse.find_by_id(params[:id]) #using params to find course by its id
         @course.update(params)
         if @course.save
-            redirect "golf_courses/#{@course.id}/home"
+            redirect "golf_courses/#{@course.id}/home" # logged in neds to match with course that has been inputed 
             flash[:notice] = "Course has been updated"
         else  
             redirect "golf_courses/home"
        end    
     end
-    get '/golf_courses/:id/edit' do
-        erb :"golf_courses/show"
-    end
+   
 
     delete '/golf_courses/:id' do  #Delete
         GolfCourse.destroy_all
@@ -73,3 +92,15 @@ end
 #| POST      | /golf_courses          | create  | 
 #| DELETE    | /golf_courses/:id      | destroy |
 #| PUT/PATCH | /golf_courses/:id      | edit    |
+
+# need to have user associated with  course
+    # only user that created course can make changes
+    # if logged in?
+    # current user matches the golfer_id
+    #allow acces or changes 
+    #else
+    #redirect index
+    
+    # who ever adds the course their id need to be matched w the foriegn id
+
+    #edit 

@@ -28,7 +28,11 @@
         <input type="submit" class="btn  grey darken-1">
     </form>
 
-<br><br><br>    
+<br><br><br>   
+    <form method="POST" action="/golfcourse/<%= @course.id %>">
+        <input type="hidden" id="hidden" name="_method" value="DELETE">
+        <input class="show-btns" type="submit" value="DELETE">
+    </form> 
 <div>           
 
 

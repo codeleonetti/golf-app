@@ -41,13 +41,12 @@ class GolfersController < ApplicationController
             end   
     end
 
+
     post '/golfer/:id' do
         @golfer = Golfer.find_by_id(params[:id])
         @golfer.destroy
         redirect "/"
-    end
-
-   
+    end 
 end
 
 # | HTTP VERB |   Route         |  Action |
