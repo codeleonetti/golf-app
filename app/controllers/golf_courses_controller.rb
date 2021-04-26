@@ -20,7 +20,7 @@ class GolfCoursesController < ApplicationController
     end
 
 
-    get '/golf_courses/new' do # this gets the form to create a new course
+    get '/golf_courses/new' do 
         if logged_in?
             erb :"golf_courses/new"
         else
@@ -28,9 +28,9 @@ class GolfCoursesController < ApplicationController
         end
     end
 
-    post '/golf_courses/new' do #saves new istance of a course #Create
+    post '/golf_courses/new' do 
         
-        @course = GolfCourse.new(params) #using params to save all data into their own (ie :name,:address, etc)
+        @course = GolfCourse.new(params)
         @course.golfer_id = logged_in?
         if @course.save
             flash[:notice] = "new course added!"
@@ -43,7 +43,7 @@ class GolfCoursesController < ApplicationController
     
  
     get '/golf_courses/:id' do
-       # if logged_in?
+       
          if @course = GolfCourse.find_by_id(params[:id])
             erb :"golf_courses/show"
          else 
@@ -53,8 +53,8 @@ class GolfCoursesController < ApplicationController
     end
     
 
-    get '/golf_courses/:id/edit' do # this getting the info to update 
-       if @course = GolfCourse.find_by_id(params[:id])   #using a instance variable to find_by_id we just set
+    get '/golf_courses/:id/edit' do # 
+       if @course = GolfCourse.find_by_id(params[:id])   
          @course.golfer_id != logged_in? || @course.golfer_id == nil
             flash[:notice] = "Not authorized to edit this course"
             redirect "golf_courses/index"
@@ -63,10 +63,10 @@ class GolfCoursesController < ApplicationController
         end
     end
     post '/golf_courses/:id/edit' do
-        @course = GolfCourse.find_by_id(params[:id]) #using params to find course by its id
+        @course = GolfCourse.find_by_id(params[:id])
         @course.update(params)
         if @course.save
-            redirect "golf_courses/#{@course.id}/home" # logged in neds to match with course that has been inputed 
+            redirect "golf_courses/#{@course.id}/home" #
             flash[:notice] = "Course has been updated"
         else  
             redirect "golf_courses/home"
