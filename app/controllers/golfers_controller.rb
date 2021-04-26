@@ -7,8 +7,8 @@ class GolfersController < ApplicationController
     
 
     get '/golfer/:id' do
-        if Golfer.where(id: params[:id]).exists?
-        @golfer = Golfer.find_by_id(params[:id])
+       # if Golfer.where(id: params[:id]).exists?
+        if @golfer = Golfer.find_by_id(params[:id])
         erb :"golfer/show"
         else 
             flash[:alert] = "Please log in on the home page"
