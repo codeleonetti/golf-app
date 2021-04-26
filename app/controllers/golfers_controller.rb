@@ -32,7 +32,7 @@ class GolfersController < ApplicationController
         end
     end
     post '/golfer/:id/edit' do
-            @golfer = Golfer.find_by_id(params[:id]) #using params to find golfer by its id
+            @golfer = Golfer.find_by_id(params[:id])
             @golfer.update(params)
             if @golfer.save
                 redirect "golfer/#{@golfer.id}"

@@ -11,8 +11,7 @@ class GolfCoursesController < ApplicationController
     end
 
     get '/golf_courses/:id/home' do
-        if logged_in?
-            @course = GolfCourse.find_by_id(params[:id])
+        if logged_in? && @course = GolfCourse.find_by_id(params[:id])
             erb :"golf_courses/home"
         else 
             redirect "golf_courses/index"
@@ -54,8 +53,8 @@ class GolfCoursesController < ApplicationController
     
 
     get '/golf_courses/:id/edit' do # 
-       if @course = GolfCourse.find_by_id(params[:id])   
-         @course.golfer_id != logged_in? || @course.golfer_id == nil
+         @course = GolfCourse.find_by_id(params[:id])   
+        if @course.golfer_id != logged_in? || @course.golfer_id == nil
             flash[:notice] = "Not authorized to edit this course"
             redirect "golf_courses/index"
         else
@@ -81,7 +80,7 @@ class GolfCoursesController < ApplicationController
             flash[:notice] = "course has been deleted"
             redirect "golf_courses/index"
         else
-            flash[:notice] = "You are not authorizedto delete this course"
+            flash[:notice] = "You are not authorized to delete this course"
             redirect "golf_courses/index"
         end
     end
