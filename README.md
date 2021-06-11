@@ -4,7 +4,7 @@ Golf Tracker:
 
 WHO WOULD USE THIS:
 
-I created Golf Tracker for people who like to golf and want to keep track of their stats. This project will be continued on rails to keep adding the fuctionality of the application.
+I created Golf App for people who like to golf and want to keep track of their stats. At this current time a user is able to make a profile, add a golf course and delete that course only.  This project will be continued on rails to keep adding the fuctionality of the application.
 
 
 INTALLATION:
